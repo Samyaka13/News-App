@@ -1,17 +1,45 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+// import { Search } from "../compnents/search.jsx";
 
 function Hero() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+  const [searchResults, setSearchResults] = useState("");
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+  const handleKeyPress = async (e) => {
+    if (e.key == "Enter") {
+      try {
+        const response = await axios.get("/acowale/search", {
+          params: {
+            q: searchTerm,
+          },
+        });
+        navigate("/search-results", {
+          state: { results: response.data.articles },
+        });
+        // setSearchResults(response.data.articles);
+      } catch (error) {
+        console.log("Error fetching search results: ", error);
+      }
+    }
+  };
   return (
-    <div className="w-full overflow-x-hidden bg-gray-900 mt-10 mb-10 md:mb-0">
-      <div className="bg-contain bg-[url('/public/news-hero.png')] bg-no-repeat w-full z-0">
+    <div className="w-full  bg-black mt-10 mb-10 md:mb-0">
+      <div className="bg-contain bg-[url('/public/hero.png')] bg-no-repeat w-full z-0">
         <div className="relative lg:left-[55%] w-full flex flex-col h-full">
           <div className="my-auto mx-auto lg:mx-0 w-11/12 sm:w-10/12 md:w-8/12 lg:w-2/5">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.2] mb-4 text-white text-center lg:text-left">
-              <span className="text-[#00df9a]">Stay Updated</span> with the Latest News!
+              <span className="text-[#00df9a]">Stay Updated</span> with the
+              Latest News!
             </h1>
             <p className="text-xl sm:text-2xl md:text-3xl leading-[1.2] mb-8 text-white text-center lg:text-left">
-              Catch up on the trending news from around the world, straight to your feed.
+              Catch up on the trending news from around the world, straight to
+              your feed.
             </p>
             <div className="flex justify-center lg:justify-start items-center">
               <Link to="/top-news">
@@ -26,6 +54,9 @@ function Hero() {
                 id="search"
                 type="text"
                 placeholder="Search news"
+                value={searchTerm}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyPress}
               />
               <div className="absolute right-0 inset-y-0 flex items-center pr-3">
                 <svg
@@ -61,6 +92,7 @@ function Hero() {
                 </svg>
               </div>
             </div>
+            {/* {searchResults.length > 0 && <Search results={searchResults} />} */}
           </div>
         </div>
       </div>

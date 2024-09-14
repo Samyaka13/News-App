@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   // State to manage the navbar's visibility
@@ -12,20 +13,21 @@ const Navbar = () => {
 
   // Array containing navigation items
   const navItems = [
-    { id: 1, text: "Home" },
-    { id: 2, text: "World" },
-    { id: 3, text: "Technology" },
-    { id: 4, text: "Sports" },
-    { id: 5, text: "Entertainment" },
+    { id: 1, text: "Home", path: "/" },
+    { id: 2, text: "World", path: "/world" },
+    { id: 3, text: "Technology", path: "/technology" },
+    { id: 4, text: "Sports", path: "/sports" },
+    { id: 5, text: "Entertainment", path: "/entertainment" },
   ];
 
   return (
-    <div className="bg-gray-900 flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white">
+    <div className="bg-gray-900 flex justify-between items-center h-24 max-w-[1340px] mx-auto px-4 text-white">
       {/* Logo */}
-      <h1 className="w-full md:text-4xl text-3xl font-bold text-[#00df9a]">
+      <Link to= '/'>
+      <h1 className="w-full md:text-4xl cursor-pointer text-3xl font-bold text-[#00df9a]">
         ACONEWS
       </h1>
-
+      </Link>
       {/* Desktop Navigation */}
       <ul className="hidden md:flex">
         {navItems.map((item) => (
@@ -33,14 +35,14 @@ const Navbar = () => {
             key={item.id}
             className="p-4 hover:bg-[#00df9a] rounded-lg m-2 mt-3 cursor-pointer duration-300 text-2xl hover:text-black"
           >
-            {item.text}
+            <Link
+              to={item.path}
+              className="hover:bg-[#00df9a] rounded-lg hover:text-black duration-300"
+            >
+              {item.text}
+            </Link>
           </li>
         ))}
-        <li className="mt-1 p-4">
-          <button className="bg-[#00df9a] hover:bg-white text-black font-semibold hover:font-bold px-6 py-4 rounded-xl duration-300">
-            Subscribe
-          </button>
-        </li>
       </ul>
 
       {/* Mobile Navigation Icon */}
@@ -67,14 +69,14 @@ const Navbar = () => {
             key={item.id}
             className="p-4 border-b rounded-xl hover:bg-[#00df9a] duration-300 hover:text-black cursor-pointer border-gray-600"
           >
-            {item.text}
+            <Link
+              to={item.path}
+              className="hover:bg-[#00df9a] rounded-lg hover:text-black duration-300"
+            >
+              {item.text}
+            </Link>
           </li>
         ))}
-        <li className="p-4">
-          <button className="bg-[#00df9a] hover:bg-white text-black font-semibold px-4 py-2 rounded-lg duration-300">
-            Subscribe
-          </button>
-        </li>
       </ul>
     </div>
   );
