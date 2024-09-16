@@ -7,7 +7,7 @@ const HeadlineCards = () => {
   // Fetch news articles on component mount
   useEffect(() => {
     axios
-      .get(`/acowale/search-sports`) // Updated API endpoint to fetch news
+      .get(`acowale/search-sports`) // Updated API endpoint to fetch news
       .then((response) => {
         setNews(response.data.articles); // Assuming the news data is under "articles"
       })
