@@ -17,22 +17,22 @@ const HeadlineCards = () => {
   }, []); // Added dependency array to run the effect only on mount
 
   return (
-    <div className="max-w-full mx-auto p-6 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div className="max-w-full mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {news.map((article, index) => (
         <div
           key={index}
-          className="bg-black shadow-md border border-[#00df9a] rounded-lg max-w-sm mb-5"
+          className="bg-black shadow-md border border-[#00df9a] rounded-lg max-w-full mb-5"
         >
           <a href={article.url} target="_blank" rel="noopener noreferrer">
             <img
-              className="rounded-t-lg"
+              className="rounded-t-lg w-full h-48 object-cover" // Responsive image class
               src={article.image || "/public/default-news.jpg"} // Fallback image if not provided
               alt={article.title}
             />
           </a>
           <div className="p-5">
             <a href={article.url} target="_blank" rel="noopener noreferrer">
-              <h5 className="text-[#00df9a] font-bold text-2xl tracking-tight mb-2">
+              <h5 className="text-[#00df9a] font-bold text-xl sm:text-2xl tracking-tight mb-2">
                 {article.title}
               </h5>
             </a>

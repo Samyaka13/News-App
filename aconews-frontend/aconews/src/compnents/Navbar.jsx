@@ -21,24 +21,22 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="bg-gray-900 flex justify-between items-center h-24 max-w-[1340px] mx-auto px-4 text-white">
+    <div className="bg-gray-900 flex justify-between items-center h-20 md:h-24 max-w-[1340px] mx-auto px-4 text-white">
       {/* Logo */}
-      <Link to= '/'>
-      <h1 className="w-full md:text-4xl cursor-pointer text-3xl font-bold text-[#00df9a]">
-        ACONEWS
-      </h1>
+      <Link to="/">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#00df9a] cursor-pointer">
+          ACONEWS
+        </h1>
       </Link>
+
       {/* Desktop Navigation */}
       <ul className="hidden md:flex">
         {navItems.map((item) => (
           <li
             key={item.id}
-            className="p-4 hover:bg-[#00df9a] rounded-lg m-2 mt-3 cursor-pointer duration-300 text-2xl hover:text-black"
+            className="p-4 m-2 cursor-pointer duration-300 text-xl md:text-2xl hover:bg-[#00df9a] rounded-lg hover:text-black"
           >
-            <Link
-              to={item.path}
-              className="hover:bg-[#00df9a] rounded-lg hover:text-black duration-300"
-            >
+            <Link to={item.path} className="duration-300">
               {item.text}
             </Link>
           </li>
@@ -46,35 +44,29 @@ const Navbar = () => {
       </ul>
 
       {/* Mobile Navigation Icon */}
-      <div onClick={handleNav} className="block md:hidden">
-        {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
+      <div onClick={handleNav} className="md:hidden cursor-pointer z-10">
+        {nav ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
       </div>
 
       {/* Mobile Navigation Menu */}
       <ul
         className={
           nav
-            ? "fixed md:hidden left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-500"
-            : "ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]"
+            ? "fixed left-0 top-0 w-[60%] h-full border-r border-gray-900 bg-gray-800 z-10 ease-in-out duration-500"
+            : "fixed left-[-100%] top-0 w-[60%] h-full ease-in-out duration-500 z-10"
         }
       >
         {/* Mobile Logo */}
-        <h1 className="w-full text-3xl font-bold text-[#00df9a] m-4">
-          ACONEWS
-        </h1>
+        <h1 className="text-3xl font-bold text-[#00df9a] m-4">ACONEWS</h1>
 
         {/* Mobile Navigation Items */}
         {navItems.map((item) => (
           <li
             key={item.id}
-            className="p-4 border-b rounded-xl hover:bg-[#00df9a] duration-300 hover:text-black cursor-pointer border-gray-600"
+            onClick={handleNav} // Close the menu on click
+            className="p-4 border-b border-gray-700 hover:bg-[#00df9a] hover:text-black rounded-lg duration-300 cursor-pointer"
           >
-            <Link
-              to={item.path}
-              className="hover:bg-[#00df9a] rounded-lg hover:text-black duration-300"
-            >
-              {item.text}
-            </Link>
+            <Link to={item.path}>{item.text}</Link>
           </li>
         ))}
       </ul>
