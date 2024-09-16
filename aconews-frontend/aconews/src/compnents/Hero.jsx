@@ -14,7 +14,7 @@ function Hero() {
   const handleKeyPress = async (e) => {
     if (e.key == "Enter") {
       try {
-        const response = await axios.get("/acowale/search", {
+        const response = await axios.get("https://news-app-2-hxyu.onrender.com/api/v1/acowale/search", {
           params: {
             q: searchTerm,
           },
