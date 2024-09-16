@@ -7,7 +7,7 @@ const HeadlineCards = () => {
   // Fetch news articles on component mount
   useEffect(() => {
     axios
-      .get(`https://news-app-2-hxyu.onrender.com/api/v1/acowale/news`) // Updated API endpoint to fetch news
+      .get(`/acowale/news`) // Updated API endpoint to fetch news
       .then((response) => {
         setNews(response.data.articles); // Assuming the news data is under "articles"
       })
